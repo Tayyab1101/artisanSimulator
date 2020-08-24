@@ -1,0 +1,139 @@
+<?php
+
+//$argv gets all the parameter passed to this php scripts including this script's name, so we will skip the first element in the $argv array , that is in this case 'artisan'
+$input = array_slice($argv, 1);
+
+//supported commands
+$commands = ["migrate"];
+
+//if no parameter is passed
+if (isset($input[0]) && in_array($input[0], $input) == false) {
+    echo "\e[41mError:";
+    echo "\e[39mThis command is not implemented yet ;D";
+} elseif (!isset($input[0])) {
+    echo "Fake Laravel Framework \e[32m1.32.0\n";
+    echo "\e[39mBy \e[34mTayyab\n\n";
+    echo "\e[33mUsage:\n";
+    echo "  \e[39mcommand [options] [arguments]\n\n";
+    echo "\e[33mOptions:\n";
+
+    echo "  \e[32m-h, --help            \e[39mDisplay this help message\n";
+    echo "  \e[32m-q, --quiet           \e[39mDo not output any message\n";
+    echo "  \e[32m-V, --version         \e[39mDisplay this application version\n";
+    echo "  \e[32m    --ansi            \e[39mForce ANSI output\n";
+    echo "  \e[32m    --no-ansi         \e[39mDisable ANSI output\n";
+    echo "  \e[32m-n, --no-interaction  \e[39mDo not ask any interactive question\n";
+    echo "  \e[32m    --env[=ENV]       \e[39mThe environment the command should run under\n";
+    echo "  \e[32m-v|vv|vvv, --verbose  \e[39mIncrease the verbosity of messages: 1 for normal output,
+   2 for more verbose output and 3 for debug\n\n";
+
+    echo "\e[33mAvailable commands:\n";
+    echo "  \e[32mclear-compiled       \e[39mRemove the compiled class file\n";
+    echo "  \e[32mdown                 \e[39mPut the application into maintenance mode\n";
+    echo "  \e[32menv                  \e[39mDisplay the current framework environment\n";
+    echo "  \e[32mhelp                 \e[39mDisplays help for a command\n";
+    echo "  \e[32minspire              \e[39mDisplay an inspiring quote\n";
+    echo "  \e[32mlist                 \e[39mLists commands\n";
+    echo "  \e[32mmigrate              \e[39mRun the database migrations\n";
+    echo "  \e[32moptimize             \e[39mCache the framework bootstrap files\n";
+    echo "  \e[32mserve                \e[39mServe the application on the PHP development server\n";
+    echo "  \e[32mtest                 \e[39mRun the application tests\n";
+    echo "  \e[32mtinker               \e[39mInteract with your application\n";
+    echo "  \e[32mui                   \e[39mSwap the front-end scaffolding for the application\n";
+    echo "  \e[32mup                   \e[39mBring the application out of maintenance mode\n";
+    echo "\e[33mauth\n";
+    echo "  \e[32mauth:clear-resets    \e[39mFlush expired password reset tokens\n";
+    echo "\e[33mcache\n";
+    echo "  \e[32mcache:clear          \e[39mFlush the application cache\n";
+    echo "  \e[32mcache:forget         \e[39mRemove an item from the cache\n";
+    echo "  \e[32mcache:table          \e[39mCreate a migration for the cache database table\n";
+    echo "\e[33mconfig\n";
+    echo "  \e[32mconfig:cache         \e[39mCreate a cache file for faster configuration loading\n";
+    echo "  \e[32mconfig:clear         \e[39mRemove the configuration cache file\n";
+    echo "\e[33mdb\n";
+    echo "  \e[32mdb:seed              \e[39mSeed the database with records\n";
+    echo "  \e[32mdb:wipe              \e[39mDrop all tables, views, and types\n";
+    echo "\e[33mevent\n";
+    echo "  \e[32mevent:cache          \e[39mDiscover and cache the application's events and listeners\n";
+    echo "  \e[32mevent:clear          \e[39mClear all cached events and listeners\n";
+    echo "  \e[32mevent:generate       \e[39mGenerate the missing events and listeners based on regist
+  ration\n";
+    echo "  \e[32mevent:list           \e[39mList the application's events and listeners\n";
+    echo "\e[33mkey\n";
+    echo "  \e[32mkey:generate         \e[39mSet the application key\n";
+    echo "\e[33mmake\n";
+    echo "  \e[32mmake:cast            \e[39mCreate a new custom Eloquent cast class\n";
+    echo "  \e[32mmake:channel         \e[39mCreate a new channel class\n";
+    echo "  \e[32mmake:command         \e[39mCreate a new Artisan command\n";
+    echo "  \e[32mmake:component       \e[39mCreate a new view component class\n";
+    echo "  \e[32mmake:controller      \e[39mCreate a new controller class\n";
+    echo "  \e[32mmake:event           \e[39mCreate a new event class\n";
+    echo "  \e[32mmake:exception       \e[39mCreate a new custom exception class\n";
+    echo "  \e[32mmake:factory         \e[39mCreate a new model factory\n";
+    echo "  \e[32mmake:job             \e[39mCreate a new job class\n";
+    echo "  \e[32mmake:listener        \e[39mCreate a new event listener class\n";
+    echo "  \e[32mmake:mail            \e[39mCreate a new email class\n";
+    echo "  \e[32mmake:middleware      \e[39mCreate a new middleware class\n";
+    echo "  \e[32mmake:migration       \e[39mCreate a new migration file\n";
+    echo "  \e[32mmake:model           \e[39mCreate a new Eloquent model class\n";
+    echo "  \e[32mmake:notification    \e[39mCreate a new notification class\n";
+    echo "  \e[32mmake:observer        \e[39mCreate a new observer class\n";
+    echo "  \e[32mmake:policy          \e[39mCreate a new policy class\n";
+    echo "  \e[32mmake:provider        \e[39mCreate a new service provider class\n";
+    echo "  \e[32mmake:request         \e[39mCreate a new form request class\n";
+    echo "  \e[32mmake:resource        \e[39mCreate a new resource\n";
+    echo "  \e[32mmake:rule            \e[39mCreate a new validation rule\n";
+    echo "  \e[32mmake:seeder          \e[39mCreate a new seeder class\n";
+    echo "  \e[32mmake:test            \e[39mCreate a new test class\n";
+    echo "\e[33mmigrate\n";
+    echo "  \e[32mmigrate:fresh        \e[39mDrop all tables and re-run all migrations\n";
+    echo "  \e[32mmigrate:install      \e[39mCreate the migration repository\n";
+    echo "  \e[32mmigrate:refresh      \e[39mReset and re-run all migrations\n";
+    echo "  \e[32mmigrate:reset        \e[39mRollback all database migrations\n";
+    echo "  \e[32mmigrate:rollback     \e[39mRollback the last database migration\n";
+    echo "  \e[32mmigrate:status       \e[39mShow the status of each migration\n";
+    echo "\e[33mnotifications\n";
+    echo "  \e[32mnotifications:table  \e[39mCreate a migration for the notifications table\n";
+    echo "\e[33moptimize\n";
+    echo "  \e[32moptimize:clear       \e[39mRemove the cached bootstrap files\n";
+    echo "\e[33mpackage\n";
+    echo "  \e[32mpackage:discover     \e[39mRebuild the cached package manifest\n";
+    echo "\e[33mqueue\n";
+    echo "  \e[32mqueue:failed         \e[39mList all of the failed queue jobs\n";
+    echo "  \e[32mqueue:failed-table   \e[39mCreate a migration for the failed queue jobs database tab
+  le\n";
+    echo "  \e[32mqueue:flush          \e[39mFlush all of the failed queue jobs\n";
+    echo "  \e[32mqueue:forget         \e[39mDelete a failed queue job\n";
+    echo "  \e[32mqueue:listen         \e[39mListen to a given queue\n";
+    echo "  \e[32mqueue:restart        \e[39mRestart queue worker daemons after their current job\n";
+    echo "  \e[32mqueue:retry          \e[39mRetry a failed queue job\n";
+    echo "  \e[32mqueue:table          \e[39mCreate a migration for the queue jobs database table\n";
+    echo "  \e[32mqueue:work           \e[39mStart processing jobs on the queue as a daemon\n";
+    echo "\e[33mroute\n";
+    echo "  \e[32mroute:cache          \e[39mCreate a route cache file for faster route registration\n";
+    echo "  \e[32mroute:clear          \e[39mRemove the route cache file\n";
+    echo "  \e[32mroute:list           \e[39mList all registered routes\n";
+    echo "\e[33mschedule\n";
+    echo "  \e[32mschedule:run         \e[39mRun the scheduled commands\n";
+    echo "\e[33msession\n";
+    echo "  \e[32msession:table        \e[39mCreate a migration for the session database table\n";
+    echo "\e[33mstorage\n";
+    echo "  \e[32mstorage:link         \e[39mCreate the symbolic links configured for the application\n";
+    echo "\e[33mstub\n";
+    echo "  \e[32mstub:publish         \e[39mPublish all stubs that are available for customization\n";
+    echo "\e[33mui\n";
+    echo "  \e[32mui:auth              \e[39mScaffold basic login and registration views and routes\n";
+    echo "  \e[32mui:controllers       \e[39mScaffold the authentication controllers\n";
+    echo "\e[33mvendor\n";
+    echo "  \e[32mvendor:publish       \e[39mPublish any publishable assets from vendor packages\n";
+    echo "\e[33mview\n";
+    echo "  \e[32mview:cache           \e[39mCompile all of the application's Blade templates\n";
+    echo "  \e[32mview:clear           \e[39mClear all compiled view files\n";
+}
+if (isset($input[0]) && $input[0] == "migrate") {
+    echo "\e[32mMigration table created successfully.\n";
+    echo "\e[33mMigrating: \e[39m" . date("Y_m_d", time()) . "_" . (time() - strtotime("today")) . "_create_users_table\n";
+    echo "\e[33mMigrated: \e[39m" . date("Y_m_d", time()) . "_" . (time() - strtotime("today")) . "_create_users_table" . " (" . rand(0, 5) . "." . rand(0, 99) . " seconds)\n";
+    echo "\e[33mMigrating: \e[39m" . date("Y_m_d", time()) . "_" . (time() - strtotime("today")) . "_create_password_resets_table\n";
+    echo "\e[33mMigrated: \e[39m" . date("Y_m_d", time()) . "_" . (time() - strtotime("today")) . "_create_password_resets_table" . " (" . rand(0, 5) . "." . rand(0, 99) . " seconds)\n";
+}
